@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 21:51:44 by myakoven          #+#    #+#             */
-/*   Updated: 2024/02/09 23:28:02 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/19 21:34:39 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,22 @@
 // #include <stdlib.h>
 // #include <unistd.h>
 
+// typedef struct s_dlist
+// {
+// 	int				nr;
+// 	int				index;
+// 	int				skip;
+// 	struct s_dlist	*prev;
+// 	struct s_dlist	*next;
+// }					t_node;
+
 typedef struct s_dlist
 {
 	int				x;
-	int				order;
-	int				skip;
+	int				pos;
+	int				above_mid;
+	struct s_dlist	*target;
+	int				cost;
 	struct s_dlist	*prev;
 	struct s_dlist	*next;
 }					t_node;
@@ -32,14 +43,16 @@ typedef struct s_dlist
 t_node				*ft_init_list(int argc, char **argv);
 int					ft_checkarray(int argc, char **arr);
 int					ft_matrixlen(char **arr);
+
+/***ERROR & CLEAR*/
 int					error_fail(void);
+int					free_array(char **arr);
+// char				**ft_free_split_ps(char **arr, int index);
 
 /****SPLIT and MAKEARRAY****/
 char				**makearray(int argc, char **argv);
-char				**ft_split_ps(char const *s, char c);
-char				**ft_free_split_ps(char **arr, int index);
-size_t				ft_wordcount_ps(char const *s, char c);
-char				**free_array(char **arr);
+// char				**ft_split_ps(char const *s, char c);
+// size_t				ft_wordcount_ps(char const *s, char c);
 
 /****MOVES****/
 int					push(t_node **stack_from, t_node **stack_to);
@@ -47,7 +60,7 @@ int					swap(t_node **stack);
 int					first_to_last(t_node **stack);
 int					last_to_first(t_node **stack);
 
-/****DOUBLE LINKED LIST BASIC OPS****/
+/****LIST UTILS****/
 void				ft_dlstadd_front(t_node **head, t_node *node);
 void				ft_dlstadd_back(t_node **lst, t_node *node);
 t_node				*ft_dlstlast(t_node *lst);

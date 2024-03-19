@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:21:22 by myakoven          #+#    #+#             */
-/*   Updated: 2024/02/09 19:35:58 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/19 21:25:56 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**makearray(int argc, char **argv)
 	{
 		argv_replace[i] = ft_strdup(argv[i + 1]);
 		if (!argv_replace[i])
-			return (ft_free_split_ps(argv_replace, i - 1));
+			return (free_array(argv_replace));
 		i++;
 	}
 	argv_replace[i] = NULL;
@@ -81,29 +81,4 @@ size_t	ft_wordcount_ps(char const *s, char c)
 	return (count);
 }
 
-char	**ft_free_split_ps(char **arr, int index)
-{
-	while (index > 0)
-	{
-		free(arr[index]);
-		index--;
-	}
-	if (index == 0)
-		free(arr[0]);
-	free(arr);
-	return (NULL);
-}
 
-char	**free_array(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-	return (NULL);
-}

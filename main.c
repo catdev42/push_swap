@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 01:11:09 by myakoven          #+#    #+#             */
-/*   Updated: 2024/02/09 23:45:04 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/19 21:39:01 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,23 @@
 
 int	main(int argc, char **argv)
 {
-	// t_node	**head_a;
 	t_node	*stack_a;
-	char	**argv_replace;
+	char	**arg_arr;
+	t_node	*stack_b;
 
-	// t_node	** stack_b;
 	stack_a = NULL;
-	// head_a = &stack_a;
-	// stack_b = NULL;
+	stack_b = NULL;
 	if (argc < 2)
-		return (1);
+		return (error_fail());
 	if (argc == 2)
-		argv_replace = ft_split(argv[1], ' ');
+		arg_arr = ft_split(argv[1], ' ');
 	else
-		argv_replace = makearray(argc, argv);
-	if (!argv_replace)
+		arg_arr = makearray(argc, argv);
+	if (!arg_arr)
 		return (1);
-	if (!ft_checkarray(argc, argv_replace))
-		return ((long)ft_free_split_ps(argv_replace, (ft_matrixlen(argv) - 1)));
-	stack_a = ft_init_list(argc, argv_replace);
+	if (!ft_checkarray(argc, arg_arr))
+		return (free_array(arg_arr));
+	stack_a = ft_init_list(argc, arg_arr);
 	swap(&stack_a);
 	ft_printf("now printing %i \n", stack_a->x);
 	ft_printf("initializes stack a %i \n", stack_a->next->x);
@@ -44,7 +42,7 @@ int	main(int argc, char **argv)
 		return (2);
 	// TO DO
 	// ft_index_list(stack_a);
-	ft_free_split_ps(argv_replace, (ft_matrixlen(argv_replace) - 1));
+	ft_free_split_ps(arg_arr, (ft_matrixlen(arg_arr) - 1));
 	return (0);
 }
 
@@ -52,16 +50,24 @@ int	ft_checkarray(int argc, char **arr)
 {
 	int	i;
 	int	j;
+	int	length;
 
 	if (argc == 2)
 		argc = ft_matrixlen(arr);
 	i = 0;
 	j = 0;
-	while (arr[j])
+	while (arr[i])
 	{
-		if (i != j && !ft_strncmp(arr[i], arr[j], ft_strlen(arr[i]) + 1))
+		length = ft_strlen(arr[i] + 1);
+		if (length > 11)
 			return (error_fail());
-		j++;
+		while (arr[j])
+		{
+			if (i != j && !ft_strncmp(arr[i], arr[j], length))
+				return (error_fail());
+			j++;
+		}
+		i++;
 	}
 	while (arr[i] && i < argc)
 	{
@@ -79,12 +85,6 @@ int	ft_checkarray(int argc, char **arr)
 	return (1);
 }
 
-int	error_fail(void)
-{
-	write(2, "Error\n", 6);
-	return (0);
-}
-
 int	ft_matrixlen(char **arr)
 {
 	int	i;
@@ -96,8 +96,8 @@ int	ft_matrixlen(char **arr)
 		i++;
 	return (i);
 }
-
-/******THIS NEEDS A COUNT LIMITER!!!*******/
+// REWRITE OMG WHYYYYY
+/******THIS NEEDS A COUNT LIMITER!!!**i dunno what this means*****/
 t_node	*ft_init_list(int argc, char **argv)
 {
 	int		i;

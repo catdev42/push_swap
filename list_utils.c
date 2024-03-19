@@ -10,8 +10,8 @@ t_node	*ft_dlstnew(int content)
 	if (!new)
 		return (NULL);
 	new->x = content;
-	new->order = 0;
-	new->skip = 0;
+	new->pos = 0;
+	// new->skip = 0;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
@@ -51,23 +51,8 @@ void	ft_dlstadd_front(t_node **head, t_node *node)
 		*head = node;
 	}
 }
-t_node	**ft_dlstclear(t_node **lst)
-{
-	t_node	*tmp;
-	t_node	*prev;
 
-	if (!lst)
-		return (NULL);
-	tmp = *lst;
-	while (tmp)
-	{
-		prev = tmp;
-		tmp = tmp->next;
-		free(prev);
-	}
-	*lst = NULL;
-	return (NULL);
-}
+
 
 int	ft_dlstsize(t_node **list)
 {
