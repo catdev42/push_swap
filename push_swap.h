@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 21:51:44 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/19 21:34:39 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/19 21:56:14 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ typedef struct s_dlist
 	struct s_dlist	*next;
 }					t_node;
 
-/****CHECK INPUT && INITIALIZE****/
+/****MAIN.C: CHECK INPUT && INITIALIZE****/
 t_node				*ft_init_list(int argc, char **argv);
 int					ft_checkarray(int argc, char **arr);
 int					ft_matrixlen(char **arr);
+char				**makearray(int argc, char **argv);
+
 
 /***ERROR & CLEAR*/
 int					error_fail(void);
@@ -50,7 +52,6 @@ int					free_array(char **arr);
 // char				**ft_free_split_ps(char **arr, int index);
 
 /****SPLIT and MAKEARRAY****/
-char				**makearray(int argc, char **argv);
 // char				**ft_split_ps(char const *s, char c);
 // size_t				ft_wordcount_ps(char const *s, char c);
 

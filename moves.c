@@ -6,13 +6,11 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 00:46:38 by myakoven          #+#    #+#             */
-/*   Updated: 2024/02/09 18:16:42 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/19 22:20:44 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-/* IS IT BETTER TO RETURN THE NEW STACK POINTER???*/
 
 int	push(t_node **stack_from, t_node **stack_to)
 {

@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split.c                                            :+:      :+:    :+:   */
+/*   make_array.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:21:22 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/19 21:25:56 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/19 21:53:27 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-char	**makearray(int argc, char **argv)
-{
-	char	**argv_replace;
-	int		i;
+// char	**makearray(int argc, char **argv)
+// {
+// 	char	**argv_replace;
+// 	int		i;
 
-	i = 0;
-	argv_replace = malloc(sizeof(char *) * argc);
-	if (!argv_replace)
-		return (NULL);
-	while (i < argc - 1)
-	{
-		argv_replace[i] = ft_strdup(argv[i + 1]);
-		if (!argv_replace[i])
-			return (free_array(argv_replace));
-		i++;
-	}
-	argv_replace[i] = NULL;
-	return (argv_replace);
-}
+// 	i = 0;
+// 	argv_replace = malloc(sizeof(char *) * argc);
+// 	if (!argv_replace)
+// 		return (NULL);
+// 	while (i < argc - 1)
+// 	{
+// 		argv_replace[i] = ft_strdup(argv[i + 1]);
+// 		if (!argv_replace[i])
+// 			return (free_array(argv_replace));
+// 		i++;
+// 	}
+// 	argv_replace[i] = NULL;
+// 	return (argv_replace);
+// }
 
 char	**ft_split_ps(char const *s, char c)
 {

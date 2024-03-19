@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 01:11:09 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/19 21:39:01 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/19 22:24:19 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int argc, char **argv)
 	t_node	*stack_a;
 	char	**arg_arr;
 	t_node	*stack_b;
+	int		argnum;
 
 	stack_a = NULL;
 	stack_b = NULL;
@@ -28,22 +29,45 @@ int	main(int argc, char **argv)
 		arg_arr = ft_split(argv[1], ' ');
 	else
 		arg_arr = makearray(argc, argv);
+	argnum = ft_matrixlen(arg_arr);
 	if (!arg_arr)
 		return (1);
-	if (!ft_checkarray(argc, arg_arr))
+	if (!ft_checkarray(argnum, arg_arr))
 		return (free_array(arg_arr));
-	stack_a = ft_init_list(argc, arg_arr);
-	swap(&stack_a);
-	ft_printf("now printing %i \n", stack_a->x);
-	ft_printf("initializes stack a %i \n", stack_a->next->x);
-	ft_printf("prints last %i \n", stack_a->next->next->x);
-	// ft_printf("should segv %i \n", stack_a->next->next->next->x);
+	stack_a = ft_init_list(argnum, arg_arr);
+	// FOR CHECKING
+	// swap(&stack_a);
+	// ft_printf("now printing %i \n", stack_a->x);
+	// ft_printf("initializes stack a %i \n", stack_a->next->x);
+	// ft_printf("prints last %i \n", stack_a->next->next->x);
+	// // ft_printf("should segv %i \n", stack_a->next->next->next->x);
 	if (!stack_a)
-		return (2);
+		return (error_fail());
 	// TO DO
 	// ft_index_list(stack_a);
-	ft_free_split_ps(arg_arr, (ft_matrixlen(arg_arr) - 1));
+	// ft_free_split_ps(arg_arr, (ft_matrixlen(arg_arr) - 1));
+	free_array(arg_arr);
 	return (0);
+}
+
+char	**makearray(int argc, char **argv)
+{
+	char	**argv_replace;
+	int		i;
+
+	i = 0;
+	argv_replace = malloc(sizeof(char *) * argc);
+	if (!argv_replace)
+		return (NULL);
+	while (i < argc - 1)
+	{
+		argv_replace[i] = ft_strdup(argv[i + 1]);
+		if (!argv_replace[i])
+			return (free_array(argv_replace));
+		i++;
+	}
+	argv_replace[i] = NULL;
+	return (argv_replace);
 }
 
 int	ft_checkarray(int argc, char **arr)

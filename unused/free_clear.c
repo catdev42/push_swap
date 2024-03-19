@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 20:59:16 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/19 21:31:27 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/19 22:05:48 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int	error_fail(void)
 {
-	// if (errornum == 0)
 	write(2, "Error\n", 6);
-	// ft_putstr_fd("Too few arguments", 2)
 	return (0);
 }
 
