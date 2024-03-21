@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 01:11:09 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/19 22:24:19 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/21 20:57:04 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,28 @@
 int	main(int argc, char **argv)
 {
 	t_node	*stack_a;
-	char	**arg_arr;
 	t_node	*stack_b;
-	int		argnum;
+	char	**arg_arr;
+	int		arg_count;
 
 	stack_a = NULL;
 	stack_b = NULL;
+	arg_arr = NULL;
 	if (argc < 2)
-		return (error_fail());
+		return (ft_clean(arg_arr, &stack_a, &stack_b, 1));
 	if (argc == 2)
 		arg_arr = ft_split(argv[1], ' ');
 	else
 		arg_arr = makearray(argc, argv);
-	argnum = ft_matrixlen(arg_arr);
 	if (!arg_arr)
-		return (1);
-	if (!ft_checkarray(argnum, arg_arr))
-		return (free_array(arg_arr));
-	stack_a = ft_init_list(argnum, arg_arr);
-	// FOR CHECKING
-	// swap(&stack_a);
-	// ft_printf("now printing %i \n", stack_a->x);
-	// ft_printf("initializes stack a %i \n", stack_a->next->x);
-	// ft_printf("prints last %i \n", stack_a->next->next->x);
-	// // ft_printf("should segv %i \n", stack_a->next->next->next->x);
+		return (2);
+	arg_count = ft_matrixlen(arg_arr);
+	if (!ft_checkarray(arg_count, arg_arr))
+		return (ft_clean(arg_arr, &stack_a, &stack_b, 2));
+	stack_a = ft_init_list(arg_count, arg_arr);
 	if (!stack_a)
-		return (error_fail());
+		return (ft_clean(arg_arr, &stack_a, &stack_b, 3));
+	ft_sort(&stack_a, &stack_b, arg_count);
 	// TO DO
 	// ft_index_list(stack_a);
 	// ft_free_split_ps(arg_arr, (ft_matrixlen(arg_arr) - 1));
@@ -157,6 +153,14 @@ t_node	*ft_init_list(int argc, char **argv)
 	// ft_dlstadd_back(stack_a_init, temp);
 	return (head);
 }
+
+// main
+// FOR CHECKING
+// swap(&stack_a);
+// ft_printf("now printing %i \n", stack_a->x);
+// ft_printf("initializes stack a %i \n", stack_a->next->x);
+// ft_printf("prints last %i \n", stack_a->next->next->x);
+// // ft_printf("should segv %i \n", stack_a->next->next->next->x);
 
 // int	ft_arrsize(char **arr)
 // {

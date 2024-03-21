@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 21:51:44 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/19 21:56:14 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/21 20:56:09 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,13 @@ int					ft_checkarray(int argc, char **arr);
 int					ft_matrixlen(char **arr);
 char				**makearray(int argc, char **argv);
 
+/****SORTING ALGORYTHM****/
+int					ft_sort(t_node **stack_a, t_node **stack_b,
+						int arg_count);
 
 /***ERROR & CLEAR*/
+int					ft_clean(char **arg_arr, t_node **stack_a, t_node **stack_b,
+						int error);
 int					error_fail(void);
 int					free_array(char **arr);
 // char				**ft_free_split_ps(char **arr, int index);
