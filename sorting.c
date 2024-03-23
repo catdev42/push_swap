@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 20:32:11 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/23 22:12:28 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/23 22:29:11 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,19 @@ int	sort_three(t_node **stack)
 	{
 		if (tmp->x > tmp->next->x && tmp->x > tmp->next->next->x)
 		{
-			if (write(1, "ra", 2) == -1)
+			if (write(1, "ra\n", 3) == -1)
 				return (0);
 			first_to_last(stack);
 		}
 		else if (tmp->x < tmp->next->x && tmp->next->next->x < tmp->x)
 		{
-			if (write(1, "rra", 2) == -1)
+			if (write(1, "rra\n", 4) == -1)
 				return (0);
 			last_to_first(stack);
 		}
 		else
 		{
-			if (write(1, "sa", 2) == -1)
+			if (write(1, "sa\n", 3) == -1)
 				return (0);
 			swap(stack);
 		}
@@ -104,7 +104,28 @@ int	sort_more(t_node **stack_a, t_node **stack_b)
 	min_to_top(stack_a);
 }
 
-int	calc_cost(t_node **stack_a, t_node **stack_b)
+int	move_to_target(t_node **stack_a, t_node **stack_b)
+{
+	t_node	*cheapest;
+	t_node	*target;
+
+	cheapest = find_cheapest(stack_b);
+	target = cheapest->target;
+	if (cheapest->above_mid && target->above_mid)
+		rotate_both(stack_a, stack_b, target, cheapest);
+	else if (!cheapest->above_mid && !target->above_mid)
+		reverse_both(stack_a, stack_b, target, cheapest);
+	index_stack(stack_a);
+	rotate_a(stack_a, target);
+	index_stack(stack_b);
+	rotate_b(stack_b, cheapest);
+	push(stack_a, stack_b);
+	if (write(1, "pa\n", 3) == -1)
+		return (0);
+	return (1);
+}
+
+void	calc_cost(t_node **stack_a, t_node **stack_b)
 {
 	t_node	*a;
 	t_node	*b;
@@ -175,7 +196,7 @@ int	push_all_to_b(t_node **stack_a, t_node **stack_b)
 			start_holding = 1;
 		if (stack_len(stack_a) > 3 && (tmp)->x == hold_in_a)
 		{
-			if (write(1, "ra", 2) == -1)
+			if (write(1, "ra\n", 3) == -1)
 				return (0);
 			first_to_last(stack_a);
 		}
@@ -183,7 +204,7 @@ int	push_all_to_b(t_node **stack_a, t_node **stack_b)
 			hold_in_a = (tmp->next->x);
 		if (start_holding == 0 || (tmp)->x != hold_in_a)
 		{
-			if (write(1, "pb", 2) == -1)
+			if (write(1, "pb\n", 3) == -1)
 				return (0);
 			push(stack_a, stack_b);
 		}

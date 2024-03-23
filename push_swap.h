@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 21:51:44 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/23 22:12:09 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/23 22:29:51 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int					find_target(t_node **stack_a, t_node **stack_b);
 t_node				*find_cheapest(t_node **stack);
 t_node				*find_min(t_node *stack);
 int					bonus(t_node *a, t_node *b, int len_a, int len_b);
-int					calc_cost(t_node **stack_a, t_node **stack_b);
+void				calc_cost(t_node **stack_a, t_node **stack_b);
 /***ERROR & CLEAR*/
 int					ft_clean(char **arg_arr, t_node **stack_a, t_node **stack_b,
 						int error);
