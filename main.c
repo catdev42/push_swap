@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 01:11:09 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/23 19:19:19 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/23 19:58:39 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	ft_checkarray(int arg_count, char **arr)
 		}
 		i++;
 	}
-	while (arr[i] && i < argc)
+	while (arr[i] && i < arg_count)
 	{
 		if (ft_atol(arr[i]) > INT_MAX || ft_atol(arr[i]) < INT_MIN)
 			return (error_fail());

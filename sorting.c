@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 20:32:11 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/23 19:47:44 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/23 20:43:40 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,76 @@ calc_current_pos(stack_a); (may be unnecessary)
 min_to_top(stack_a);
 */
 
+int	sort_more(t_node **stack_a, t_node **stack_b)
+{
+	int		hold_in_a;
+	t_node	*min_address;
+	int		start_holding;
+	t_node	*tmp;
 
+	tmp = *stack_a;
+	start_holding = 0;
+	min_address = find_min(stack_a);
+	hold_in_a = min_address->x;
+	if (!is_sorted(stack_a))
+		sort_three(stack_a);
+	while (*stack_b)
+	{
+		calc_current_pos(stack_a);
+		calc_current_pos(stack_b);
+		calc_target_node(stack_a, stack_b);
+		calc_cost(stack_a, stack_b);
+		move_to_target(stack_a, stack_b);
+	}
+}
 
+int	push_all_to_b(t_node **stack_a, t_node **stack_b)
+{
+	int		hold_in_a;
+	t_node	*min_address;
+	int		start_holding;
+	t_node	*tmp;
+
+	tmp = *stack_a;
+	start_holding = 0;
+	min_address = find_min(stack_a);
+	hold_in_a = min_address->x;
+	while (!is_sorted(stack_a) && stack_len(stack_a) > 3)
+	{
+		if ((tmp)->x == hold_in_a)
+			start_holding = 1;
+		if (stack_len(stack_a) > 3 && (tmp)->x == hold_in_a)
+		{
+			if (write(1, "ra", 2) == -1)
+				return (0);
+			first_to_last(stack_a);
+		}
+		if (start_holding == 1 && tmp->next->x > hold_in_a)
+			hold_in_a = (tmp->next->x);
+		if (start_holding == 0 || (tmp)->x != hold_in_a)
+		{
+			if (write(1, "pb", 2) == -1)
+				return (0);
+			push(stack_a, stack_b);
+		}
+	}
+	return (1);
+}
+
+int	stack_len(t_node **stack)
+{
+	size_t	i;
+	t_node	*tmp;
+
+	i = 0;
+	tmp = *stack;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
+}
 
 int	find_target(t_node **stack_a, t_node **stack_b)
 {
@@ -96,6 +164,8 @@ int	find_target(t_node **stack_a, t_node **stack_b)
 	tmp_a = *stack_a;
 	tmp_b = *stack_b;
 	while (tmp_b)
+		if (write(1, "sa", 2) == -1)
+			return (0);
 	{
 		tmp_a = *stack_a;
 		target_num == INT_MAX;

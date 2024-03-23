@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 21:51:44 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/23 19:32:00 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/23 20:00:12 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ char				**makearray(int argc, char **argv);
 /****SORTING ALGORYTHM****/
 int					ft_sort(t_node **stack_a, t_node **stack_b, int arg_count);
 int					is_sorted(t_node **stack_a);
+
+int					sort_two(t_node **stack);
+int					sort_three(t_node **stack);
+
 
 /***ERROR & CLEAR*/
 int					ft_clean(char **arg_arr, t_node **stack_a, t_node **stack_b,
