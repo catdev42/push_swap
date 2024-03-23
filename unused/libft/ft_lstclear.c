@@ -1,25 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/26 14:59:56 by myakoven          #+#    #+#             */
-/*   Updated: 2024/02/14 16:25:10 by myakoven         ###   ########.fr       */
+/*   Created: 2023/11/27 20:43:41 by myakoven          #+#    #+#             */
+/*   Updated: 2023/12/09 17:07:20 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	while (*s)
+	t_list	*tmp;
+	t_list	*prev;
+
+	if (!lst)
+		return ;
+	tmp = *lst;
+	while (tmp)
 	{
-		ft_putchar_fd(*s, fd);
-		s++;
+		prev = tmp;
+		tmp = tmp->next;
+		ft_lstdelone(prev, del);
 	}
-	ft_putchar_fd('\n', fd);
+	*lst = NULL;
 }
 
-/**/
+/*
+void	ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	t_list	*tmp;
+	t_list	*prev;
+
+	if (!lst)
+		return ;
+	tmp = *lst;
+	while (tmp->next)
+	{
+		prev = tmp;
+		del(tmp->content);
+		tmp = tmp->next;
+		free(prev);
+	}
+	*lst = 0;
+}
+*/

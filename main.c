@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 01:11:09 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/21 20:57:04 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/23 19:19:19 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 	if (!ft_checkarray(arg_count, arg_arr))
 		return (ft_clean(arg_arr, &stack_a, &stack_b, 2));
 	stack_a = ft_init_list(arg_count, arg_arr);
-	if (!stack_a)
+	if (!stack_a || is_sorted(&stack_a))
 		return (ft_clean(arg_arr, &stack_a, &stack_b, 3));
 	ft_sort(&stack_a, &stack_b, arg_count);
 	// TO DO
@@ -44,6 +44,21 @@ int	main(int argc, char **argv)
 	// ft_free_split_ps(arg_arr, (ft_matrixlen(arg_arr) - 1));
 	free_array(arg_arr);
 	return (0);
+}
+
+int	is_sorted(t_node **stack_a)
+{
+	t_node	*tmp;
+
+	tmp = *stack_a;
+	tmp = tmp->next;
+	while (tmp)
+	{
+		if (tmp->x < tmp->prev->x)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
 }
 
 char	**makearray(int argc, char **argv)
@@ -66,14 +81,12 @@ char	**makearray(int argc, char **argv)
 	return (argv_replace);
 }
 
-int	ft_checkarray(int argc, char **arr)
+int	ft_checkarray(int arg_count, char **arr)
 {
 	int	i;
 	int	j;
 	int	length;
 
-	if (argc == 2)
-		argc = ft_matrixlen(arr);
 	i = 0;
 	j = 0;
 	while (arr[i])

@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/26 14:59:56 by myakoven          #+#    #+#             */
-/*   Updated: 2024/02/14 16:25:10 by myakoven         ###   ########.fr       */
+/*   Created: 2023/11/27 20:20:04 by myakoven          #+#    #+#             */
+/*   Updated: 2023/11/27 20:35:03 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	while (*s)
+	t_list	*ptr;
+
+	if (!new || !lst)
+		return ;
+	if (!*lst)
 	{
-		ft_putchar_fd(*s, fd);
-		s++;
+		*lst = new;
+		return ;
 	}
-	ft_putchar_fd('\n', fd);
+	ptr = ft_lstlast(*lst);
+	ptr->next = new;
 }
 
-/**/
+/* Getting confused with **lst or *ptr */

@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/26 14:59:56 by myakoven          #+#    #+#             */
-/*   Updated: 2024/02/14 16:25:10 by myakoven         ###   ########.fr       */
+/*   Created: 2023/11/20 18:29:47 by myakoven          #+#    #+#             */
+/*   Updated: 2023/12/11 20:12:43 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	while (*s)
-	{
-		ft_putchar_fd(*s, fd);
-		s++;
-	}
-	ft_putchar_fd('\n', fd);
-}
+	size_t	i;
+	size_t	j;
+	char	*str;
 
-/**/
+	str = (char *)big;
+	if (!(*little))
+		return (str);
+	if (!big || !ft_strlen(big))
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		j = 0;
+		while (str[i + j] && str[i + j] == little[j] && (i + j) < len)
+		{
+			j++;
+			if (little[j] == 0)
+				return (&str[i]);
+		}
+		i++;
+	}
+	return (NULL);
+}

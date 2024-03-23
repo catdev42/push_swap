@@ -1,25 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/26 14:59:56 by myakoven          #+#    #+#             */
-/*   Updated: 2024/02/14 16:25:10 by myakoven         ###   ########.fr       */
+/*   Created: 2023/11/26 15:03:10 by myakoven          #+#    #+#             */
+/*   Updated: 2023/11/26 22:20:26 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
-	while (*s)
+	if (n == -2147483648)
 	{
-		ft_putchar_fd(*s, fd);
-		s++;
+		ft_putstr_fd("-2147483648", fd);
+		return ;
 	}
-	ft_putchar_fd('\n', fd);
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		n *= -1;
+	}
+	if (n >= 10)
+	{
+		ft_putnbr_fd(n / 10, fd);
+	}
+	n = n % 10;
+	ft_putchar_fd((n % 10 + 48), fd);
 }
-
-/**/
+/*
+int	main(void)
+{
+	ft_putnbr_fd(-4212345, 1);
+}
+*/
+/* A file descriptor of 0, 1, or 2, refers to
+the standard input, standard output, or standard error, respectively */
