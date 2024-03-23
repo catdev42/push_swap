@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 21:51:44 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/23 22:29:51 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/23 22:53:59 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,14 @@ int					sort_two(t_node **stack);
 int					sort_three(t_node **stack);
 int					sort_more(t_node **stack_a, t_node **stack_b);
 int					push_all_to_b(t_node **stack_a, t_node **stack_b);
+
+/****ROTATIONS****/
+int					rotate_both(t_node **stack_a, t_node **stack_b,
+						t_node *target, t_node *cheapest);
+int					reverse_both(t_node **stack_a, t_node **stack_b,
+						t_node *target, t_node *cheapest);
+int					rotate_a(t_node **stack_a, t_node *target);
+int					rotate_b(t_node **stack_b, t_node *cheapest);
 
 /****CALCULATIONS OF COST AND POSITION****/
 int					stack_len(t_node **stack);

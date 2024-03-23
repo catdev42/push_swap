@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 20:32:11 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/23 22:29:11 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/23 22:56:12 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,9 @@ int	sort_more(t_node **stack_a, t_node **stack_b)
 		calc_cost(stack_a, stack_b);
 		move_to_target(stack_a, stack_b);
 	}
-	// to know how many times to rotate?
-	calc_current_pos(stack_a);
-	min_to_top(stack_a);
+	//also calculates above or below min which controls moves
+	index_stack(stack_a);
+	rotate_a(stack_a, min_address);
 }
 
 int	move_to_target(t_node **stack_a, t_node **stack_b)
@@ -119,7 +119,7 @@ int	move_to_target(t_node **stack_a, t_node **stack_b)
 	rotate_a(stack_a, target);
 	index_stack(stack_b);
 	rotate_b(stack_b, cheapest);
-	push(stack_a, stack_b);
+	push(stack_b, stack_a);
 	if (write(1, "pa\n", 3) == -1)
 		return (0);
 	return (1);
