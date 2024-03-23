@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 20:32:11 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/23 21:51:54 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/23 22:12:28 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,8 @@ int	calc_cost(t_node **stack_a, t_node **stack_b)
 			else if (b->target == a && !a->above_mid && b->above_mid)
 				b->cost = (len_a - a->pos) + b->pos;
 			else if (b->target == a && !a->above_mid && !b->above_mid)
-				b->cost = (len_a - a->pos) + (len_b - b->pos) - bonus (a, b, len_a, len_b);
+				b->cost = (len_a - a->pos) + (len_b - b->pos) - bonus(a, b,
+						len_a, len_b);
 			a = a->next;
 		}
 		b = b->next;
@@ -276,4 +277,25 @@ t_node	*find_min(t_node *stack)
 		tmp = tmp->next;
 	}
 	return (min_node);
+}
+
+t_node	*find_cheapest(t_node **stack)
+{
+	int		cheap_cost;
+	t_node	*cheapest_node;
+	t_node	*tmp;
+
+	cheap_cost = INT_MAX;
+	tmp = *stack;
+	cheapest_node = NULL;
+	while (tmp)
+	{
+		if (tmp->cost < cheap_cost)
+		{
+			cheapest_node = tmp;
+			cheap_cost = tmp->cost;
+		}
+		tmp = tmp->next;
+	}
+	return (cheapest_node);
 }

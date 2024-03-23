@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 21:51:44 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/23 20:00:12 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/23 22:12:09 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,23 @@ int					ft_matrixlen(char **arr);
 char				**makearray(int argc, char **argv);
 
 /****SORTING ALGORYTHM****/
+
 int					ft_sort(t_node **stack_a, t_node **stack_b, int arg_count);
 int					is_sorted(t_node **stack_a);
 
 int					sort_two(t_node **stack);
 int					sort_three(t_node **stack);
+int					sort_more(t_node **stack_a, t_node **stack_b);
+int					push_all_to_b(t_node **stack_a, t_node **stack_b);
 
-
+/****CALCULATIONS OF COST AND POSITION****/
+int					stack_len(t_node **stack);
+int					index_stack(t_node **stack);
+int					find_target(t_node **stack_a, t_node **stack_b);
+t_node				*find_cheapest(t_node **stack);
+t_node				*find_min(t_node *stack);
+int					bonus(t_node *a, t_node *b, int len_a, int len_b);
+int					calc_cost(t_node **stack_a, t_node **stack_b);
 /***ERROR & CLEAR*/
 int					ft_clean(char **arg_arr, t_node **stack_a, t_node **stack_b,
 						int error);
