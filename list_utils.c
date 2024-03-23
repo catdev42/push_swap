@@ -10,8 +10,8 @@ t_node	*ft_dlstnew(int content)
 	if (!new)
 		return (NULL);
 	new->x = content;
-	new->pos = 0;
-	// new->skip = 0;
+	new->pos = -1;
+	new->above_mid = 0;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

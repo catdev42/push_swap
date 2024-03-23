@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 20:32:11 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/23 20:43:40 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/23 21:51:54 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,25 +85,76 @@ min_to_top(stack_a);
 
 int	sort_more(t_node **stack_a, t_node **stack_b)
 {
-	int		hold_in_a;
 	t_node	*min_address;
-	int		start_holding;
-	t_node	*tmp;
 
-	tmp = *stack_a;
-	start_holding = 0;
 	min_address = find_min(stack_a);
-	hold_in_a = min_address->x;
+	push_all_to_b(stack_a, stack_b);
 	if (!is_sorted(stack_a))
 		sort_three(stack_a);
 	while (*stack_b)
 	{
-		calc_current_pos(stack_a);
-		calc_current_pos(stack_b);
-		calc_target_node(stack_a, stack_b);
+		index_stack(stack_a);
+		index_stack(stack_b);
+		find_target(stack_a, stack_b);
 		calc_cost(stack_a, stack_b);
 		move_to_target(stack_a, stack_b);
 	}
+	// to know how many times to rotate?
+	calc_current_pos(stack_a);
+	min_to_top(stack_a);
+}
+
+int	calc_cost(t_node **stack_a, t_node **stack_b)
+{
+	t_node	*a;
+	t_node	*b;
+	int		len_a;
+	int		len_b;
+
+	len_a = stack_len(stack_a);
+	len_b = stack_len(stack_b);
+	b = *stack_b;
+	while (b)
+	{
+		a = *stack_a;
+		while (a)
+		{
+			if (b->target == a && a->above_mid && b->above_mid)
+				b->cost = a->pos + b->pos - bonus(a, b, len_a, len_b);
+			else if (b->target == a && a->above_mid && !b->above_mid)
+				b->cost = a->pos + (len_b - b->pos);
+			else if (b->target == a && !a->above_mid && b->above_mid)
+				b->cost = (len_a - a->pos) + b->pos;
+			else if (b->target == a && !a->above_mid && !b->above_mid)
+				b->cost = (len_a - a->pos) + (len_b - b->pos) - bonus (a, b, len_a, len_b);
+			a = a->next;
+		}
+		b = b->next;
+	}
+}
+
+int	bonus(t_node *a, t_node *b, int len_a, int len_b)
+{
+	int	bon;
+
+	// int	len_a;
+	// int	len_b;
+	// len_a = stack_len(stack_a);
+	// len_b = stack_len(stack_b);
+	bon = 0;
+	if (a->above_mid == 1 && b->above_mid == 1)
+	{
+		bon = a->pos;
+		if (a->pos > b->pos)
+			bon = b->pos;
+	}
+	else if (a->above_mid == 0 && b->above_mid == 0)
+	{
+		bon = len_a - a->pos;
+		if (len_b - b->pos < bon)
+			bon = len_b - b->pos;
+	}
+	return (bon);
 }
 
 int	push_all_to_b(t_node **stack_a, t_node **stack_b)
@@ -154,34 +205,56 @@ int	stack_len(t_node **stack)
 	return (i);
 }
 
+int	index_stack(t_node **stack)
+{
+	t_node	*tmp;
+	int		i;
+	int		len;
+
+	len = stack_len(stack);
+	i = 0;
+	tmp = *stack;
+	while (tmp)
+	{
+		tmp->pos = i;
+		tmp = tmp->next;
+		if (i < (len + 1) / 2)
+			tmp->above_mid = 1;
+		else
+			tmp->above_mid = 0;
+		i++;
+	}
+	return (1);
+}
+
 int	find_target(t_node **stack_a, t_node **stack_b)
 {
-	t_node	*tmp_a;
-	t_node	*tmp_b;
+	t_node	*a;
+	t_node	*b;
 	t_node	*target_address;
 	int		target_num;
 
-	tmp_a = *stack_a;
-	tmp_b = *stack_b;
-	while (tmp_b)
-		if (write(1, "sa", 2) == -1)
-			return (0);
+	a = *stack_a;
+	b = *stack_b;
+	// if (write(1, "sa", 2) == -1)
+	// 		return (0); WHY IS THIS HERE???
+	while (b)
 	{
-		tmp_a = *stack_a;
+		a = *stack_a;
 		target_num == INT_MAX;
-		tmp_b->target = NULL;
-		while (tmp_a)
+		b->target = NULL;
+		while (a)
 		{
-			if (tmp_a->x > tmp_b->x && tmp_a->x < target_num)
+			if (a->x > b->x && a->x < target_num)
 			{
-				target_num = tmp_a->x;
-				target_address = tmp_a;
+				target_num = a->x;
+				target_address = a;
 			}
 		}
-		tmp_b->target = target_address;
-		if (tmp_b->target == NULL)
-			tmp_b->target = find_min(*stack_a);
-		tmp_b = tmp_b->next;
+		b->target = target_address;
+		if (b->target == NULL)
+			b->target = find_min(*stack_a);
+		b = b->next;
 	}
 }
 
