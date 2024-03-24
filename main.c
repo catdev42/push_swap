@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 01:11:09 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/23 19:58:39 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/24 10:57:56 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,29 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
+// int	is_sorted(t_node **stack_a)
+// {
+// 	t_node	*tmp;
+
+// 	tmp = *stack_a;
+// 	tmp = tmp->next;
+// 	while (tmp)
+// 	{
+// 		if (tmp->x < tmp->prev->x)
+// 			return (0);
+// 		tmp = tmp->next;
+// 	}
+// 	return (1);
+// }
 int	is_sorted(t_node **stack_a)
 {
 	t_node	*tmp;
 
 	tmp = *stack_a;
-	tmp = tmp->next;
-	while (tmp)
+	// tmp = tmp->next;
+	while (tmp->next)
 	{
-		if (tmp->x < tmp->prev->x)
+		if (tmp->x > tmp->next->x)
 			return (0);
 		tmp = tmp->next;
 	}
@@ -74,7 +88,10 @@ char	**makearray(int argc, char **argv)
 	{
 		argv_replace[i] = ft_strdup(argv[i + 1]);
 		if (!argv_replace[i])
-			return (free_array(argv_replace));
+		{
+			free_array(argv_replace);
+			return (NULL);
+		}
 		i++;
 	}
 	argv_replace[i] = NULL;
@@ -91,13 +108,14 @@ int	ft_checkarray(int arg_count, char **arr)
 	j = 0;
 	while (arr[i])
 	{
-		length = ft_strlen(arr[i] + 1);
+		length = ft_strlen(arr[i]) + 1;
+		//because int min
 		if (length > 11)
-			return (error_fail());
+			return (0);
 		while (arr[j])
 		{
 			if (i != j && !ft_strncmp(arr[i], arr[j], length))
-				return (error_fail());
+				return (0);
 			j++;
 		}
 		i++;
@@ -105,12 +123,12 @@ int	ft_checkarray(int arg_count, char **arr)
 	while (arr[i] && i < arg_count)
 	{
 		if (ft_atol(arr[i]) > INT_MAX || ft_atol(arr[i]) < INT_MIN)
-			return (error_fail());
+			return (0);
 		j = 0;
 		while (arr[i][j])
 		{
 			if (!ft_isdigit(arr[i][j]))
-				return (error_fail());
+				return (0);
 			j++;
 		}
 		i++;

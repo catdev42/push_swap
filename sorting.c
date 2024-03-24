@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 20:32:11 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/23 22:56:12 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/24 11:05:22 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,17 @@ int	ft_sort(t_node **stack_a, t_node **stack_b, int arg_count)
 		if (!sort_two(stack_a))
 			return (0);
 	if (arg_count == 3)
-		if (!sort_three)
+		if (!sort_three(stack_a))
 			return (0);
 	if (arg_count > 3)
-		if (!sort_big(stack_a, stack_b))
+		if (!sort_more(stack_a, stack_b))
 			return (0);
 	return (1);
 }
 
 int	sort_two(t_node **stack)
 {
-	t_node	*tmp;
-
-	tmp = *stack;
-	if (write(1, "sa", 2) == -1)
+	if (write(1, "sa\n", 3) == -1)
 		return (0);
 	swap(stack);
 	return (1);
@@ -41,9 +38,9 @@ int	sort_three(t_node **stack)
 {
 	t_node	*tmp;
 
-	tmp = *stack;
 	while (!is_sorted(stack))
 	{
+		tmp = *stack;
 		if (tmp->x > tmp->next->x && tmp->x > tmp->next->next->x)
 		{
 			if (write(1, "ra\n", 3) == -1)
@@ -62,8 +59,8 @@ int	sort_three(t_node **stack)
 				return (0);
 			swap(stack);
 		}
-		return (1);
 	}
+	return (1);
 }
 
 // TODO: FUNCTION FOR SORT MORE
@@ -99,9 +96,10 @@ int	sort_more(t_node **stack_a, t_node **stack_b)
 		calc_cost(stack_a, stack_b);
 		move_to_target(stack_a, stack_b);
 	}
-	//also calculates above or below min which controls moves
+	// also calculates above or below min which controls moves
 	index_stack(stack_a);
 	rotate_a(stack_a, min_address);
+	return (1);
 }
 
 int	move_to_target(t_node **stack_a, t_node **stack_b)
@@ -263,7 +261,7 @@ int	find_target(t_node **stack_a, t_node **stack_b)
 	while (b)
 	{
 		a = *stack_a;
-		target_num == INT_MAX;
+		target_num = INT_MAX;
 		b->target = NULL;
 		while (a)
 		{
@@ -275,26 +273,31 @@ int	find_target(t_node **stack_a, t_node **stack_b)
 		}
 		b->target = target_address;
 		if (b->target == NULL)
-			b->target = find_min(*stack_a);
+			b->target = find_min(stack_a);
 		b = b->next;
 	}
+	return (1);
 }
 
-t_node	*find_min(t_node *stack)
+t_node	*find_min(t_node **stack)
 {
 	int		smallest;
 	t_node	*min_node;
 	t_node	*tmp;
 
-	if (!stack)
-		return ((t_node *)error_fail());
+	if (!stack || !*stack)
+		return (NULL);
+	// return ((t_node *)error_fail());
 	smallest = INT_MAX;
-	tmp = stack;
+	tmp = *stack;
 	min_node = NULL;
 	while (tmp)
 	{
 		if (tmp->x < smallest)
+		{
 			min_node = tmp;
+			smallest = tmp->x;
+		}
 		tmp = tmp->next;
 	}
 	return (min_node);

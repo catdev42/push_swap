@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 03:02:39 by myakoven          #+#    #+#             */
-/*   Updated: 2024/02/18 21:33:58 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/24 09:17:47 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*get_next_line(int fd)
 
 char	*ft_read(int fd, char *line, char *buffer)
 {
-	size_t			i;
+	// size_t			i;
 	long long int	bytes_read;
 	char			*newline;
 

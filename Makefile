@@ -6,7 +6,7 @@
 #    By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/17 15:27:14 by myakoven          #+#    #+#              #
-#    Updated: 2024/03/19 21:18:40 by myakoven         ###   ########.fr        #
+#    Updated: 2024/03/24 09:37:47 by myakoven         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIBFT = ./libft/libft.a
 #------------------------------------------------#
 
 HEADERS 	:= .
-SRC     	:= split.c list_utils.c main.c moves.c free_clear.c
+SRC     	:= error_clean.c list_utils.c main.c moves_big.c moves.c sorting.c
 OBJS     	= $(SRC:.c=.o)
 
 # BONUS		= 
@@ -48,7 +48,7 @@ $(LIBFT):
 	$(MAKE) -C $(LIBDIR)
 
 $(NAME): $(LIBFT) $(OBJS) 
-	$(CC) -g3 $(CFLAGS) $(LIBFT) dll_utils.c main.c moves.c split.c -I push_swap.h -o $@
+	$(CC) -g3 $(CFLAGS) $(LIBFT) error_clean.c list_utils.c main.c moves_big.c moves.c sorting.c -o push_swap
 
 # $(CC) -g $(CFLAGS) ./libft/*.o ./libft/printf/*.o $(OBJS)  -o $@
 

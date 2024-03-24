@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 00:46:38 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/19 22:20:44 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/24 10:55:22 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	first_to_last(t_node **stack)
 {
 	t_node	*templast;
 	t_node	*newstart;
+	t_node	*newlast;
 
 	if (!*stack || !stack)
 	{
@@ -74,8 +75,11 @@ int	first_to_last(t_node **stack)
 	while (templast->next)
 		templast = templast->next;
 	templast->next = *stack;
-	templast->next->next = NULL;
+	newlast = templast->next;
+	newlast->next = NULL;
+	newlast->prev = templast;
 	*stack = newstart;
+	newstart->prev = NULL;
 	return (1);
 }
 
@@ -83,6 +87,8 @@ int	last_to_first(t_node **stack)
 {
 	t_node	*newstart;
 
+	// t_node	*tmp;
+	// tmp = *stack;
 	if (!*stack || !stack)
 	{
 		ft_printf("nothing to swap, stack is empty (error)");
@@ -90,9 +96,12 @@ int	last_to_first(t_node **stack)
 	}
 	newstart = *stack;
 	while (newstart->next)
+	{
 		newstart = newstart->next;
+	}
 	newstart->prev->next = NULL;
 	newstart->next = *stack;
 	*stack = newstart;
+	newstart->next->prev = newstart;
 	return (1);
 }
