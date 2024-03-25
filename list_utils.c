@@ -2,20 +2,20 @@
 
 #include "push_swap.h"
 
-t_node	*ft_dlstnew(int content)
-{
-	t_node	*new;
+// t_node	*ft_dlstnew(int content)
+// {
+// 	t_node	*new;
 
-	new = malloc(sizeof(t_node));
-	if (!new)
-		return (NULL);
-	new->x = content;
-	new->pos = -1;
-	new->above_mid = 0;
-	new->next = NULL;
-	new->prev = NULL;
-	return (new);
-}
+// 	new = (t_node *)malloc(sizeof(t_node));
+// 	if (!new)
+// 		return (NULL);
+// 	new->x = content;
+// 	new->pos = 0;
+// 	new->above_mid = 0;
+// 	new->next = NULL;
+// 	new->prev = NULL;
+// 	return (new);
+// }
 
 t_node	*ft_dlstlast(t_node *lst)
 {

@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 20:32:11 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/24 11:05:22 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/24 22:05:46 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,31 +63,26 @@ int	sort_three(t_node **stack)
 	return (1);
 }
 
-// TODO: FUNCTION FOR SORT MORE
 
-/*
-while there is more than 3 items in stack_a, push to stack b
-Sort three in stack_a
-while there are items in stack_b
-{
-	calc_positions(stack_a);
-	calc_positions(stack_b);
-	calc_targets;
-	calc_cost;
-	move_to_target;
-}
-calc_current_pos(stack_a); (may be unnecessary)
-min_to_top(stack_a);
-*/
 
 int	sort_more(t_node **stack_a, t_node **stack_b)
 {
 	t_node	*min_address;
+	int		size;
 
 	min_address = find_min(stack_a);
-	push_all_to_b(stack_a, stack_b);
-	if (!is_sorted(stack_a))
+	// push_all_to_b(stack_a, stack_b);
+	while (stack_len(stack_a) > 3)
+	{
+		if (write(1, "pb\n", 3) == -1)
+			return (0);
+		push(stack_a, stack_b);
+	}
+	size = stack_len(stack_a);
+	if (size == 3)
 		sort_three(stack_a);
+	else
+		write(1, "not 3\n", 6);
 	while (*stack_b)
 	{
 		index_stack(stack_a);
@@ -102,11 +97,46 @@ int	sort_more(t_node **stack_a, t_node **stack_b)
 	return (1);
 }
 
+/*
+int	push_all_to_b(t_node **stack_a, t_node **stack_b)
+{
+	int		hold_in_a;
+	t_node	*min_address;
+	int		start_holding;
+	
+	start_holding = 0;
+	min_address = find_min(stack_a);
+	hold_in_a = min_address->x;
+	while (!is_sorted(stack_a) && stack_len(stack_a) > 3)
+	{
+		if ((*stack_a)->x == hold_in_a)
+			start_holding = 1;
+		if (start_holding == 1 && (*stack_a)->next->x > hold_in_a)
+			hold_in_a = ((*stack_a)->next->x);
+		if (start_holding == 1 && (*stack_a)->x == hold_in_a)
+		{
+			if (write(1, "ra\n", 3) == -1)
+				return (0);
+			first_to_last(stack_a);
+		}
+		else if (start_holding == 0 || (*stack_a)->x != hold_in_a)
+		{
+			if (write(1, "pb\n", 3) == -1)
+				return (0);
+			push(stack_a, stack_b);
+		}
+		// else if (start_holding == 1 && tmp->x == hold_in_a)
+		// 	tmp =
+	}
+	return (1);
+}
+*/
+
 int	move_to_target(t_node **stack_a, t_node **stack_b)
 {
 	t_node	*cheapest;
 	t_node	*target;
-
+	
 	cheapest = find_cheapest(stack_b);
 	target = cheapest->target;
 	if (cheapest->above_mid && target->above_mid)
@@ -157,10 +187,6 @@ int	bonus(t_node *a, t_node *b, int len_a, int len_b)
 {
 	int	bon;
 
-	// int	len_a;
-	// int	len_b;
-	// len_a = stack_len(stack_a);
-	// len_b = stack_len(stack_b);
 	bon = 0;
 	if (a->above_mid == 1 && b->above_mid == 1)
 	{
@@ -177,75 +203,6 @@ int	bonus(t_node *a, t_node *b, int len_a, int len_b)
 	return (bon);
 }
 
-int	push_all_to_b(t_node **stack_a, t_node **stack_b)
-{
-	int		hold_in_a;
-	t_node	*min_address;
-	int		start_holding;
-	t_node	*tmp;
-
-	tmp = *stack_a;
-	start_holding = 0;
-	min_address = find_min(stack_a);
-	hold_in_a = min_address->x;
-	while (!is_sorted(stack_a) && stack_len(stack_a) > 3)
-	{
-		if ((tmp)->x == hold_in_a)
-			start_holding = 1;
-		if (stack_len(stack_a) > 3 && (tmp)->x == hold_in_a)
-		{
-			if (write(1, "ra\n", 3) == -1)
-				return (0);
-			first_to_last(stack_a);
-		}
-		if (start_holding == 1 && tmp->next->x > hold_in_a)
-			hold_in_a = (tmp->next->x);
-		if (start_holding == 0 || (tmp)->x != hold_in_a)
-		{
-			if (write(1, "pb\n", 3) == -1)
-				return (0);
-			push(stack_a, stack_b);
-		}
-	}
-	return (1);
-}
-
-int	stack_len(t_node **stack)
-{
-	size_t	i;
-	t_node	*tmp;
-
-	i = 0;
-	tmp = *stack;
-	while (tmp)
-	{
-		i++;
-		tmp = tmp->next;
-	}
-	return (i);
-}
-
-int	index_stack(t_node **stack)
-{
-	t_node	*tmp;
-	int		i;
-	int		len;
-
-	len = stack_len(stack);
-	i = 0;
-	tmp = *stack;
-	while (tmp)
-	{
-		tmp->pos = i;
-		tmp = tmp->next;
-		if (i < (len + 1) / 2)
-			tmp->above_mid = 1;
-		else
-			tmp->above_mid = 0;
-		i++;
-	}
-	return (1);
-}
 
 int	find_target(t_node **stack_a, t_node **stack_b)
 {
@@ -256,8 +213,7 @@ int	find_target(t_node **stack_a, t_node **stack_b)
 
 	a = *stack_a;
 	b = *stack_b;
-	// if (write(1, "sa", 2) == -1)
-	// 		return (0); WHY IS THIS HERE???
+	target_address = NULL;
 	while (b)
 	{
 		a = *stack_a;
@@ -270,6 +226,7 @@ int	find_target(t_node **stack_a, t_node **stack_b)
 				target_num = a->x;
 				target_address = a;
 			}
+			a = a->next;
 		}
 		b->target = target_address;
 		if (b->target == NULL)
@@ -287,7 +244,6 @@ t_node	*find_min(t_node **stack)
 
 	if (!stack || !*stack)
 		return (NULL);
-	// return ((t_node *)error_fail());
 	smallest = INT_MAX;
 	tmp = *stack;
 	min_node = NULL;

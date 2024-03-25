@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 01:11:09 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/24 10:57:56 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/24 22:05:25 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,31 @@ int	main(int argc, char **argv)
 	if (!stack_a || is_sorted(&stack_a))
 		return (ft_clean(arg_arr, &stack_a, &stack_b, 3));
 	ft_sort(&stack_a, &stack_b, arg_count);
-	// TO DO
-	// ft_index_list(stack_a);
-	// ft_free_split_ps(arg_arr, (ft_matrixlen(arg_arr) - 1));
+	// t_node	*tmp;
+
+	// tmp = stack_a;
+	// ft_printf("Printing the stack to check \n");
+	// while (tmp)
+	// {
+	// 	ft_printf("%i \n", tmp->x);
+	// 	tmp = tmp->next;
+	// }
+
 	free_array(arg_arr);
 	return (0);
 }
+
+// CHECK IT
+
+// 	t_node *tmp;
+// tmp = *stack-a;
+// 	ft_printf("Printing the stack to check \n");
+
+// while (tmp)
+// {
+// 	ft_printf("%i \n", tmp->x);
+// 	tmp = tmp->nextl
+// }
 
 // int	is_sorted(t_node **stack_a)
 // {
@@ -60,81 +79,11 @@ int	main(int argc, char **argv)
 // 	}
 // 	return (1);
 // }
-int	is_sorted(t_node **stack_a)
-{
-	t_node	*tmp;
 
-	tmp = *stack_a;
-	// tmp = tmp->next;
-	while (tmp->next)
-	{
-		if (tmp->x > tmp->next->x)
-			return (0);
-		tmp = tmp->next;
-	}
-	return (1);
-}
 
-char	**makearray(int argc, char **argv)
-{
-	char	**argv_replace;
-	int		i;
 
-	i = 0;
-	argv_replace = malloc(sizeof(char *) * argc);
-	if (!argv_replace)
-		return (NULL);
-	while (i < argc - 1)
-	{
-		argv_replace[i] = ft_strdup(argv[i + 1]);
-		if (!argv_replace[i])
-		{
-			free_array(argv_replace);
-			return (NULL);
-		}
-		i++;
-	}
-	argv_replace[i] = NULL;
-	return (argv_replace);
-}
 
-int	ft_checkarray(int arg_count, char **arr)
-{
-	int	i;
-	int	j;
-	int	length;
 
-	i = 0;
-	j = 0;
-	while (arr[i])
-	{
-		length = ft_strlen(arr[i]) + 1;
-		//because int min
-		if (length > 11)
-			return (0);
-		while (arr[j])
-		{
-			if (i != j && !ft_strncmp(arr[i], arr[j], length))
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	while (arr[i] && i < arg_count)
-	{
-		if (ft_atol(arr[i]) > INT_MAX || ft_atol(arr[i]) < INT_MIN)
-			return (0);
-		j = 0;
-		while (arr[i][j])
-		{
-			if (!ft_isdigit(arr[i][j]))
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
 
 int	ft_matrixlen(char **arr)
 {
@@ -146,43 +95,6 @@ int	ft_matrixlen(char **arr)
 	while (arr[i])
 		i++;
 	return (i);
-}
-// REWRITE OMG WHYYYYY
-/******THIS NEEDS A COUNT LIMITER!!!**i dunno what this means*****/
-t_node	*ft_init_list(int argc, char **argv)
-{
-	int		i;
-	t_node	*temp;
-	t_node	*head;
-	t_node	*last;
-
-	// t_node	**stack_a_init;
-	// stack_a_init = NULL;
-	if (argc == 2)
-		argc = ft_matrixlen(argv);
-	i = 0;
-	head = ft_dlstnew(ft_atoi(argv[i++]));
-	// stack_a_init = &head;
-	temp = head;
-	while (argv[i] && i < argc)
-	{
-		last = temp;
-		temp = ft_dlstnew(ft_atol(argv[i++]));
-		if (!temp)
-		{
-			(ft_dlstclear(&head));
-			return (NULL);
-		}
-		last->next = temp;
-		temp->prev = last;
-	}
-	temp->next = NULL;
-	// WHY IS THIS HERE?
-	// temp = ft_dlstnew(ft_atoi(argv[i++]));
-	// if (!temp)
-	// 	ft_dlstclear(stack_a_init);
-	// ft_dlstadd_back(stack_a_init, temp);
-	return (head);
 }
 
 // main
