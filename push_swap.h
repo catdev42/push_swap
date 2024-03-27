@@ -6,9 +6,11 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 21:51:44 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/26 03:30:47 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/28 00:03:20 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #ifndef PUSH_SWAP
 # define PUSH_SWAP
@@ -61,8 +63,7 @@ t_node				*find_min(t_node **stack);
 int					bonus(t_node *a, t_node *b, int len_a, int len_b);
 void				calc_cost(t_node **stack_a, t_node **stack_b);
 /***ERROR & CLEAR*/
-int					ft_clean(char **arg_arr, t_node **stack_a, t_node **stack_b,
-						int error);
+int					ft_clean(char **arg_arr, t_node **stack_a, t_node **stack_b, int error);
 int					error_fail(void);
 int					free_array(char **arr);
 

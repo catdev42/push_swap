@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 18:10:54 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/24 20:25:01 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/28 00:12:41 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	is_sorted(t_node **stack_a)
 	t_node	*tmp;
 
 	tmp = *stack_a;
-	// tmp = tmp->next;
 	while (tmp->next)
 	{
 		if (tmp->x > tmp->next->x)
@@ -26,7 +25,7 @@ int	is_sorted(t_node **stack_a)
 	}
 	return (1);
 }
-
+//DIVIDE
 int	ft_checkarray(int arg_count, char **arr)
 {
 	int	i;

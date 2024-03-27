@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moves.c                                            :+:      :+:    :+:   */
+/*   moves_noprev.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 00:46:38 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/26 02:12:37 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/28 00:02:50 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ int	push(t_node **stack_from, t_node **stack_to)
 		return (0);
 	}
 	temp_move = *stack_from;
-	temp_move->prev = NULL;
-	temp_newhead = temp_move->next;
-	temp_newhead->prev = NULL;
+	// temp_move->prev = NULL;
+	temp_newhead = (*stack_from)->next;
+	// temp_newhead->prev = NULL;
 	if (stack_from && stack_to)
 	{
 		if (*stack_to)
 			temp_move->next = *stack_to;
 		else
 			temp_move->next = NULL;
-		if (stack_to && *stack_to)
-			(*stack_to)->prev = temp_move;
+		// if (stack_to && *stack_to)
+		// (*stack_to)->prev = temp_move;
 		*stack_to = temp_move;
 		*stack_from = temp_newhead;
 	}
@@ -53,57 +53,57 @@ int	swap(t_node **stack)
 	first = *stack;
 	second = (*stack)->next;
 	// temp = first;
-	first->next = first->next->next;
-	first->prev = second;
+	first->next = second->next;
+	// first->prev = second;
 	second->next = first;
-	second->prev = NULL;
+	// second->prev = NULL;
 	*stack = second;
 	return (1);
 }
 
 int	first_to_last(t_node **stack)
 {
-	t_node	*templast;
-	t_node	*newstart;
-	t_node	*newlast;
+	t_node	*first;
+	t_node	*second;
+	t_node	*oldlast;
 
 	if (!*stack || !stack)
 	{
 		ft_printf("nothing to swap, stack empty(error)");
 		return (0);
 	}
-	newstart = (*stack)->next;
-	templast = *stack;
-	while (templast->next)
-		templast = templast->next;
-	templast->next = *stack;
-	newlast = templast->next;
-	newlast->next = NULL;
-	newlast->prev = templast;
-	*stack = newstart;
-	newstart->prev = NULL;
+	first = *stack;
+	second = (*stack)->next;
+	oldlast = *stack;
+	while (oldlast->next)
+		oldlast = oldlast->next;
+	oldlast->next = first;
+	first->next = NULL;
+	*stack = second;
 	return (1);
 }
 
 int	last_to_first(t_node **stack)
 {
-	t_node	*newstart;
+	t_node *last;
+    t_node *newlast;
 
-	// t_node	*tmp;
-	// tmp = *stack;
 	if (!*stack || !stack)
 	{
 		ft_printf("nothing to swap, stack is empty (error)");
 		return (0);
 	}
-	newstart = *stack;
-	while (newstart->next)
-	{
-		newstart = newstart->next;
-	}
-	newstart->prev->next = NULL;
-	newstart->next = *stack;
-	*stack = newstart;
-	newstart->next->prev = newstart;
+	last = *stack;
+	while (last->next->next)
+		last = last->next;
+    newlast = last;
+    last = last->next;
+	
+	// newstart->prev->next = NULL;
+	last->next = *stack;
+    newlast->next = NULL;
+	*stack = last;
+    
+	// newstart->next->prev = newstart;
 	return (1);
 }
