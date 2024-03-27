@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 21:51:44 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/24 09:29:59 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/26 03:30:47 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,6 @@
 # define PUSH_SWAP
 
 # include "./libft/libft.h"
-// #include <limits.h>
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <unistd.h>
-
-// typedef struct s_dlist
-// {
-// 	int				nr;
-// 	int				index;
-// 	int				skip;
-// 	struct s_dlist	*prev;
-// 	struct s_dlist	*next;
-// }					t_node;
 
 typedef struct s_dlist
 {
@@ -46,7 +33,6 @@ int					ft_matrixlen(char **arr);
 char				**makearray(int argc, char **argv);
 
 /****SORTING ALGORYTHM****/
-
 int					ft_sort(t_node **stack_a, t_node **stack_b, int arg_count);
 int					is_sorted(t_node **stack_a);
 
@@ -54,6 +40,8 @@ int					sort_two(t_node **stack);
 int					sort_three(t_node **stack);
 int					sort_more(t_node **stack_a, t_node **stack_b);
 int					push_all_to_b(t_node **stack_a, t_node **stack_b);
+int					p_to_b(t_node **stack_a, t_node **stack_b);
+void				actual_sorting(t_node **stack_a, t_node **stack_b);
 
 /****ROTATIONS****/
 int					move_to_target(t_node **stack_a, t_node **stack_b);
@@ -77,11 +65,9 @@ int					ft_clean(char **arg_arr, t_node **stack_a, t_node **stack_b,
 						int error);
 int					error_fail(void);
 int					free_array(char **arr);
-// char				**ft_free_split_ps(char **arr, int index);
 
-/****SPLIT and MAKEARRAY****/
-// char				**ft_split_ps(char const *s, char c);
-// size_t				ft_wordcount_ps(char const *s, char c);
+/***DEBUGGING***/
+void	print_all(t_node **stack_a, t_node **stack_b);
 
 /****MOVES****/
 int					push(t_node **stack_from, t_node **stack_to);
@@ -97,18 +83,4 @@ t_node				*ft_dlstnew(int content);
 t_node				**ft_dlstclear(t_node **lst);
 int					ft_dlstsize(t_node **list);
 
-/*
-t_list				*ft_lstnew(void *content);
-
-t_list				*ft_lstnew(void *content);
-void				ft_lstadd_front(t_list **first, t_list *new);
-int					ft_lstsize(t_list *lst);
-t_list				*ft_lstlast(t_list *lst);
-void				ft_lstadd_back(t_list **lst, t_list *new);
-void				ft_lstdelone(t_list *lst, void (*del)(void *));
-void				ft_lstclear(t_list **lst, void (*del)(void *));
-void				ft_lstiter(t_list *lst, void (*f)(void *));
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *),
-						void (*del)(void *));
-*/
 #endif

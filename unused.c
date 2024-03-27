@@ -1,3 +1,6 @@
+
+
+
 /*
 int	push_all_to_b(t_node **stack_a, t_node **stack_b)
 {

@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 01:11:09 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/24 22:05:25 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/26 03:32:04 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	main(int argc, char **argv)
 		return (ft_clean(arg_arr, &stack_a, &stack_b, 3));
 	ft_sort(&stack_a, &stack_b, arg_count);
 	// t_node	*tmp;
-
 	// tmp = stack_a;
 	// ft_printf("Printing the stack to check \n");
 	// while (tmp)
@@ -48,8 +47,8 @@ int	main(int argc, char **argv)
 	// 	ft_printf("%i \n", tmp->x);
 	// 	tmp = tmp->next;
 	// }
-
-	free_array(arg_arr);
+	ft_clean(arg_arr, &stack_a, &stack_b, 0);
+	// free_array(arg_arr);
 	return (0);
 }
 
@@ -79,11 +78,6 @@ int	main(int argc, char **argv)
 // 	}
 // 	return (1);
 // }
-
-
-
-
-
 
 int	ft_matrixlen(char **arr)
 {
