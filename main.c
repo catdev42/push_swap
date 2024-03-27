@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 01:11:09 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/28 00:19:51 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/28 00:39:16 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,43 @@ int	ft_matrixlen(char **arr)
 	while (arr[i])
 		i++;
 	return (i);
+}
+
+int	sort_two(t_node **stack)
+{
+	if (write(1, "sa\n", 3) == -1)
+		return (0);
+	swap(stack);
+	return (1);
+}
+
+int	sort_three(t_node **stack)
+{
+	t_node	*tmp;
+
+	while (!is_sorted(stack))
+	{
+		tmp = *stack;
+		if (tmp->x > tmp->next->x && tmp->x > tmp->next->next->x)
+		{
+			if (write(1, "ra\n", 3) == -1)
+				return (0);
+			first_to_last(stack);
+		}
+		else if (tmp->x < tmp->next->x && tmp->next->next->x < tmp->x)
+		{
+			if (write(1, "rra\n", 4) == -1)
+				return (0);
+			last_to_first(stack);
+		}
+		else
+		{
+			if (write(1, "sa\n", 3) == -1)
+				return (0);
+			swap(stack);
+		}
+	}
+	return (1);
 }
 
 /*

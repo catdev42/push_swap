@@ -6,14 +6,12 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 21:51:44 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/28 00:03:20 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/28 00:36:18 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
-#ifndef PUSH_SWAP
-# define PUSH_SWAP
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 # include "./libft/libft.h"
 
@@ -31,6 +29,7 @@ typedef struct s_dlist
 /****MAIN.C: CHECK INPUT && INITIALIZE****/
 t_node				*ft_init_list(int argc, char **argv);
 int					ft_checkarray(int argc, char **arr);
+int					ft_checkdup(int arg_count, char **arr);
 int					ft_matrixlen(char **arr);
 char				**makearray(int argc, char **argv);
 
@@ -63,12 +62,13 @@ t_node				*find_min(t_node **stack);
 int					bonus(t_node *a, t_node *b, int len_a, int len_b);
 void				calc_cost(t_node **stack_a, t_node **stack_b);
 /***ERROR & CLEAR*/
-int					ft_clean(char **arg_arr, t_node **stack_a, t_node **stack_b, int error);
+int					ft_clean(char **arg_arr, t_node **stack_a, t_node **stack_b,
+						int error);
 int					error_fail(void);
 int					free_array(char **arr);
 
 /***DEBUGGING***/
-void	print_all(t_node **stack_a, t_node **stack_b);
+void				print_all(t_node **stack_a, t_node **stack_b);
 
 /****MOVES****/
 int					push(t_node **stack_from, t_node **stack_to);

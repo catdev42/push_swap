@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 18:10:54 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/28 00:12:41 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/28 00:35:08 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,14 @@ int	is_sorted(t_node **stack_a)
 	}
 	return (1);
 }
-//DIVIDE
+
 int	ft_checkarray(int arg_count, char **arr)
 {
 	int	i;
-	int	j;
 	int	k;
 	int	length;
 
 	i = 0;
-	j = 0;
 	while (arr[i] && i < arg_count)
 	{
 		length = ft_strlen(arr[i]) + 1;
@@ -50,6 +48,23 @@ int	ft_checkarray(int arg_count, char **arr)
 			else
 				k++;
 		}
+		if (!ft_checkdup(arg_count, arr))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	ft_checkdup(int arg_count, char **arr)
+{
+	int	i;
+	int	j;
+	int	length;
+
+	i = 0;
+	while (arr[i] && i < arg_count)
+	{
+		length = ft_strlen(arr[i]) + 1;
 		j = 0;
 		while (arr[j])
 		{

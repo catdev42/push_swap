@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 21:58:25 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/28 00:13:12 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/28 00:35:50 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@ t_node	**ft_dlstclear(t_node **lst)
 	*lst = NULL;
 	return (NULL);
 }
+
 int	free_array(char **arr)
 {
-	int i;
+	int	i;
 
 	if (!arr)
 		return (0);

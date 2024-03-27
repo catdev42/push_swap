@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 22:33:39 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/28 00:13:26 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/28 00:35:56 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ int	reverse_both(t_node **stack_a, t_node **stack_b, t_node *target,
 		last_to_first(stack_a);
 		last_to_first(stack_b);
 	}
-		return (1);
-
+	return (1);
 }
 
 int	rotate_a(t_node **stack_a, t_node *target)

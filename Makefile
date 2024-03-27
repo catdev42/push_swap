@@ -6,7 +6,7 @@
 #    By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/17 15:27:14 by myakoven          #+#    #+#              #
-#    Updated: 2024/03/28 00:21:40 by myakoven         ###   ########.fr        #
+#    Updated: 2024/03/28 00:38:31 by myakoven         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,14 +16,12 @@ LIBNAME = libft.a
 LIBDIR = ./libft
 LIBFT = ./libft/libft.a
 
-# INCLUDES = ./include
-
 #------------------------------------------------#
 #   INGREDIENTS                                  #
 #------------------------------------------------#
 
 HEADERS 	:= .
-SRC     	:= checking.c create.c error_clean.c main.c moves_big.c moves.c sorting.c
+SRC     	:= calculations.c checking.c create.c error_clean.c main.c moves_big.c moves.c sorting.c
 OBJS     	:= $(SRC:.c=.o)
 
 CC      	:= cc

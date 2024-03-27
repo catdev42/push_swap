@@ -6,7 +6,7 @@
 /*   By: myakoven <myakoven@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 18:11:04 by myakoven          #+#    #+#             */
-/*   Updated: 2024/03/28 00:12:51 by myakoven         ###   ########.fr       */
+/*   Updated: 2024/03/28 00:35:33 by myakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ t_node	*ft_init_list(int argcount, char **arg_arr)
 	t_node	*head;
 	t_node	*last;
 
-	
 	i = 0;
 	head = ft_dlstnew(ft_atol(arg_arr[i++]));
 	temp = head;
@@ -72,7 +71,7 @@ t_node	*ft_dlstnew(int content)
 	new->x = content;
 	new->pos = 0;
 	new->above_mid = 0;
-    new->target = NULL;
+	new->target = NULL;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
